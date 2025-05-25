@@ -17,6 +17,9 @@ fun AppNavigator() {
             HomeScreen(
                 onNavigateToDetails = { movieId ->
                     navController.navigate("details/$movieId")
+                },
+                onNavigateToSearch = {
+                    navController.navigate("search")
                 }
             )
         }

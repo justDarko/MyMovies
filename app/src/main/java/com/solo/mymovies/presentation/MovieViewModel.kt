@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.solo.mymovies.data.CustomResult
+import com.solo.mymovies.domain.model.ContentType
 import com.solo.mymovies.domain.useCase.GetMovieCreditsUseCase
 import com.solo.mymovies.domain.useCase.GetMovieDetailsUseCase
 import com.solo.mymovies.domain.useCase.GetPopularMoviesUseCase
+import com.solo.mymovies.domain.useCase.SearchMediaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +22,8 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     getPopularMoviesUseCase: GetPopularMoviesUseCase,
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
-    private val getMovieCreditsUseCase: GetMovieCreditsUseCase
+    private val getMovieCreditsUseCase: GetMovieCreditsUseCase,
+    private val searchMediaUseCase: SearchMediaUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(MovieViewState())
@@ -72,4 +75,22 @@ class MovieViewModel @Inject constructor(
                 }
         }
     }
+
+    fun search(query: String, type: ContentType) {
+        viewModelScope.launch {
+            searchMediaUseCase.execute(SearchMediaUseCase.Params(query = query, type = type))
+                .collectLatest { result ->
+                    when (result) {
+                        is CustomResult.Success -> {
+                            _viewState.update { it.copy(searchResults = result.data) }
+                        }
+
+                        is CustomResult.Failure -> {
+                            Timber.e("Search failed: ${result.message}")
+                        }
+                    }
+                }
+        }
+    }
+
 }

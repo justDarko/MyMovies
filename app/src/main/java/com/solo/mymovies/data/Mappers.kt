@@ -1,8 +1,10 @@
 package com.solo.mymovies.data
 
+import com.solo.mymovies.data.remote.dto.MediaItemDTO
 import com.solo.mymovies.data.remote.dto.MovieCrewDTO
 import com.solo.mymovies.data.remote.dto.MovieDetailsDTO
 import com.solo.mymovies.data.remote.dto.PopularMovieDTO
+import com.solo.mymovies.domain.model.MediaItem
 import com.solo.mymovies.domain.model.MovieCrew
 import com.solo.mymovies.domain.model.MovieDetails
 import com.solo.mymovies.domain.model.PopularMovie
@@ -44,4 +46,12 @@ fun MovieCrewDTO.toMovieCrew() = MovieCrew(
     profilePath = profilePath,
     name = name,
     creditId = creditId
+)
+
+fun MediaItemDTO.toMediaItem() = MediaItem(
+    id = id,
+    posterPath = posterPath,
+    name = name,
+    title = title,
+    voteAverage = voteAverage
 )
