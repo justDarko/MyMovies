@@ -41,12 +41,16 @@ class MovieViewModel @Inject constructor(
                             Timber.d("The movie details are: ${result.data}")
                             _viewState.update {
                                 it.copy(
+                                    error = null,
                                     movieDetails = result.data
                                 )
                             }
                         }
 
                         is CustomResult.Failure -> {
+                            _viewState.update {
+                                it.copy(error = result.message)
+                            }
                             Timber.d("Error getting movie details ...")
                         }
                     }
@@ -63,12 +67,16 @@ class MovieViewModel @Inject constructor(
                             Timber.d("The movie details are: ${result.data}")
                             _viewState.update {
                                 it.copy(
+                                    error = null,
                                     movieAuthors = result.data
                                 )
                             }
                         }
 
                         is CustomResult.Failure -> {
+                            _viewState.update {
+                                it.copy(error = result.message)
+                            }
                             Timber.d("Error getting movie credits ...")
                         }
                     }
@@ -92,5 +100,4 @@ class MovieViewModel @Inject constructor(
                 }
         }
     }
-
 }
