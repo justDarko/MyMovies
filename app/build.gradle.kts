@@ -11,8 +11,6 @@ android {
     namespace = "com.solo.mymovies"
     compileSdk = 35
 
-//    val apiKey: String = project.findProperty("API_KEY") as String
-
     defaultConfig {
         applicationId = "com.solo.mymovies"
         minSdk = 27
@@ -39,7 +37,7 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"https://api.themoviedb.org/3/movie/\""
+                value = "\"https://api.themoviedb.org/3/\""
             )
             // Access Token ->
             val p = Properties()
