@@ -1,6 +1,5 @@
 package com.solo.mymovies.domain.model
 
-import com.google.gson.annotations.SerializedName
 import com.solo.mymovies.data.remote.dto.GenreDTO
 
 data class MovieDetails(

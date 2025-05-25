@@ -119,4 +119,11 @@ dependencies {
 
     // Timber for logs ->
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    // Coroutine test ->
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    // Mock ->
+    testImplementation("io.mockk:mockk:1.13.10")
+    // Turbine for Flow testing
+    testImplementation("app.cash.turbine:turbine:0.12.1")
 }
