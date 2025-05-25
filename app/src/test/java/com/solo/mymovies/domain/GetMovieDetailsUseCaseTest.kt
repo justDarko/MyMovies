@@ -6,13 +6,11 @@ import com.solo.mymovies.domain.useCase.GetMovieDetailsUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class GetMovieDetailsUseCaseTest {
 
     private val repository: MovieRepository = mockk()
