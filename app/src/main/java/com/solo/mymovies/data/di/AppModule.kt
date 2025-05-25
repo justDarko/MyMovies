@@ -2,6 +2,8 @@ package com.solo.mymovies.data.di
 
 import com.solo.mymovies.BuildConfig
 import com.solo.mymovies.data.remote.api.ApiService
+import com.solo.mymovies.data.repository.MovieRepositoryImpl
+import com.solo.mymovies.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,4 +50,12 @@ class AppModule {
     @Singleton
     fun provideNetworkService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMovieRepository(
+        apiService: ApiService
+    ): MovieRepository {
+        return MovieRepositoryImpl(apiService)
+    }
 }
